@@ -1,6 +1,7 @@
 require('dotenv').config();
 const animal = require('./db/models/animal'); // Adjust the path based on your file structure
-const { createAnimal } = require('./db/animalsCrud'); // Adjust the path based on your file structure
+// const { createAnimal } = require('./db/animalsCrud'); // Adjust the path based on your file structure
+const animalRoutes = require('./db/routes/animalRoutes');
 
 const paths = require('path');
 const express = require('express');
@@ -28,20 +29,7 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
-app.get('/animal', (req, res) => {
-  res.send('Hello, world!');
-});
-
-app.post('/animal', async (req, res) => {
-  try {
-    const animal = req.body;
-    const newAnimal = await createAnimal(animal);
-    return res.status(201).send(newAnimal);
-  } catch (error) {
-    console.error('Error creating animal:', error);
-    res.status(500).send({ error: 'Failed to create animal' });
-  }
-});
+app.use('/animal', animalRoutes)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

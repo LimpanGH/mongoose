@@ -7,6 +7,4 @@ const createAnimal = async (animal) => {
 };
 
 // Exporting the createAnimal function so it can be used in other parts of the application
-module.exports = {
-  createAnimal,
-};
+module.exports = createAnimal
