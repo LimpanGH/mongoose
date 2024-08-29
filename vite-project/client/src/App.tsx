@@ -1,73 +1,35 @@
-import { useState } from 'react';
-import { ReactDOM } from 'react-dom/client';
-
-import './App.css';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
-  console.log('asdf');
-
-  const [name, setName] = useState('');
-  const [species, setSpecies] = useState('');
-  const [age, setAge] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Create a new animal object
-    const newAnimal = {
-      name,
-      species,
-      age
-    };
-
-    try {
-      // Send a POST request to save the new animal to MongoDB
-      const response = await fetch('/api/animals', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newAnimal)
-      });
-
-      if (response.ok) {
-        // Animal saved successfully
-        console.log('Animal saved!');
-        // Reset form fields
-        setName('');
-        setSpecies('');
-        setAge('');
-      } else {
-        // Error saving animal
-        console.error('Failed to save animal');
-      }
-    } catch (error) {
-      console.error('Failed to save animal', error);
-    }
-  };
+  const [count, setCount] = useState(0)
 
   return (
     <>
       <div>
-        <h1>hej</h1>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
       </div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </label>
-        <label>
-          Species:
-          <input type="text" value={species} onChange={(e) => setSpecies(e.target.value)} />
-        </label>
-        <label>
-          Age:
-          <input type="text" value={age} onChange={(e) => setAge(e.target.value)} />
-        </label>
-        <button type="submit">Save Animal</button>
-      </form>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
